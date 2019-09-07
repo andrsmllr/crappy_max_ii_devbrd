@@ -1,0 +1,29 @@
+
+module top #(
+  parameter F_CLK = 50000000
+) (
+  input  wire clk_i,
+  output wire led1_p_o,
+  output wire led1_n_o,
+  output wire led2_p_o,
+  output wire led2_n_o
+);
+
+reg [26:0] cntr = F_CLK/2;
+reg led = 0;
+always @ (posedge clk_i)
+begin
+  cntr <= cntr - 1;
+  if (cntr == 'd0) begin
+    cntr <= F_CLK/2;
+    led <= ~led;
+  end
+end
+
+assign led1_p_o = 1'b1;
+assign led1_n_o = 1'b0;
+
+assign led2_p_o = led;
+assign led2_n_o = !led;
+
+endmodule

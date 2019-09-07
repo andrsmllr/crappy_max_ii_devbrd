@@ -1,0 +1,10 @@
+create_clock -name clk -period 20 -waveform {0 10} [get_ports {clk_i}]
+create_generated_clock -name clk_div2  -source [get_ports clk_i]   -divide_by 2 [get_nets clk_div2] 
+create_generated_clock -name clk_div4  -source [get_nets clk_div2] -divide_by 2 [get_nets clk_div4] 
+create_generated_clock -name clk_div8  -source [get_nets clk_div4] -divide_by 2 [get_nets clk_div8] 
+create_generated_clock -name clk_div16 -source [get_nets clk_div8] -divide_by 2 [get_nets clk_div16] 
+
+set_input_delay -clock [get_clocks clk_div16] -max 10 [all_outputs]
+set_input_delay -clock [get_clocks clk_div16] -min 10 [all_outputs]
+set_output_delay -clock [get_clocks clk_div16] -max 10 [all_outputs]
+set_output_delay -clock [get_clocks clk_div16] -min 10 [all_outputs]

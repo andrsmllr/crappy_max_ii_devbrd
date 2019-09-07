@@ -1,0 +1,11 @@
+create_clock -name clk -period 20 [get_ports {clk_i}]
+create_generated_clock -name clk_div2 -period 20 [get_ports {clk_i}]
+create_generated_clock -name clk_div4 -period 20 [get_ports {clk_i}]
+create_generated_clock -name clk_div8 -period 20 [get_ports {clk_i}]
+create_generated_clock -name clk_div16 -period 20 [get_ports {clk_i}]
+
+set_input_delay -clock [get_clocks clk] -max 10 [get_ports]
+set_input_delay -clock [get_clocks clk] -min 10 [get_ports]
+
+set_output_delay -clock [get_clocks clk] -max 10 [get_ports]
+set_output_delay -clock [get_clocks clk] -min 10 [get_ports]

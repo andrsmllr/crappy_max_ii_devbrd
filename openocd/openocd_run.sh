@@ -1,0 +1,1 @@
+openocd -f interface/altera-usb-blaster -f cpld/altera-epm240.cfg
